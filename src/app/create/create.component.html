@@ -1,0 +1,70 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12"> 
+        <hr />
+        <div class="float-left">
+          <h5>Загрузка файла</h5>
+        </div>
+        <div class="float-right">
+          <input type="file" #fileInput placeholder="Upload file..." />
+          <button class="btn btn-primary" [disabled]='progr' (click)="upload()">Загрузить</button>
+          &nbsp;<button class="btn btn-success" (click)="showIp()">Узнать IP</button> 
+        </div>
+        <br /> 
+        <div [hidden]='!progr' class="text-center">
+              <fa-icon [icon]="['fas', 'spinner']" [fixedWidth]="true" size="2x" [spin]="true"></fa-icon>
+               &nbsp;Загрузка...
+        </div>       
+      <!--
+        <div [hidden]='!progr' class="progress"> 
+          <div class="progress-bar" role="progressbar" [style.width]="width + '%'"
+            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ percent }}%
+          </div>
+        </div>
+      -->
+        
+      <hr />
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">  
+    <div class="col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12"> 
+      <h5>Список файлов</h5>    
+      <table #filesTable data-page-length='5' id='somelist' class="table table-sm table-hover table-bordered">
+      <thead>
+                  <tr class="text-center">
+                  <th><small>Nn</small></th>
+                  <th><small>Наименование</small></th>
+                  <th><small>Загружено</small></th>
+                  <th><small>Размер, байт</small></th>
+                  <th><small>Файл</small></th>
+                  </tr>
+      </thead> 
+        <tbody>
+          <tr *ngFor="let f of listFiles; let i = index">
+              <td><small>{{ i+1 }}</small></td>
+              <td><small>{{ f.filename }}</small></td>
+              <!--<td><a href="ajax/view_doc.php?path={{f.urlfile}}" target="_blank">{{f.filename}}</a></td>-->
+              <td><small>{{ f.write }}</small></td>
+              <td><small>{{ f.size }}</small></td>
+<td style="width:70px">
+  <div class="btn-group">
+    <button  class="btn btn-sm" (click)="view_doc1(f.urlfile, f.filename)" style="background-color: rgb(186, 213, 248);"
+    ngbPopover="Скачать" triggers="mouseenter:mouseleave" placement="bottom">
+                  <fa-icon [icon]="['fas', 'download']" [fixedWidth]="true" size="1x"></fa-icon> 
+    </button>
+    <button  class="btn btn-sm" (click)="del_doc(f.filename)" style="background-color: rgb(216, 248, 186);"
+    ngbPopover="Удалить" triggers="mouseenter:mouseleave" placement="bottom">
+                  <fa-icon [icon]="['fas', 'trash']" [fixedWidth]="true" size="1x"></fa-icon> 
+    </button>
+  </div>
+</td>
+          </tr>
+      </tbody>
+  </table>
+  </div>
+ </div>
+</div>
+

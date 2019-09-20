@@ -1,0 +1,89 @@
+<div class="container">
+  <div class="row">
+      <div class="col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">
+        <div class="float-left">
+          <h5>Все телефоны ПФР в Волгоградской области</h5>
+        </div>
+      <div class="float-right">
+        <div class="input-group">
+                        <select class="form-control-sm" [(ngModel)]="youSelect">
+                            <option  *ngFor="let dpt of dptdsc" [ngValue]="dpt.dptcod">
+                                {{dpt.dptname}}
+                            </option>
+                        </select>
+              <div class="input-group-append">
+                        <button class="btn btn-primary btn-sm" ngbPopover="Добавить новый номер телефона для выбранного 
+                        подразделения (района)" 
+                        triggers="mouseenter:mouseleave" placement="bottom" 
+                        (click)="showNew(youSelect)">
+                        Добавить   
+                        </button> 
+              </div>  
+        </div>
+      </div>  
+  </div>
+</div>
+</div>
+<div class="container">
+  <div class="row">  
+    <div class="col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12"> 
+      <div [hidden]='idx&lt;0' class="form-group row">
+        <label for="edit" class="col-sm-9 col-form-label">Выбрана строка, номер: {{ idx+1 }}, {{ indx }} - {{ selFam }}</label>
+
+        <div class="btn-group btn-group-sm" name = "edit" >
+          <button  class="btn btn-success" (click)="openU(idx)">Редактировать</button>
+          <button  class="btn btn-danger" (click)="delRecord(idx)">Удалить</button>
+          <button  class="btn btn-primary" (click)="someClickHandler('0')">&times;</button>
+        </div>
+
+      </div>
+            
+      <div [hidden]='idx>=0' class="text-center">
+        <i>Выбор строки = щелчок мыши</i>
+      </div>
+      
+    </div>
+  </div>      
+</div>
+<div class="container">
+  <div class="row">  
+    <div class="col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12">     
+      <table #usersTable data-page-length='3' id='somelist' class="table table-sm table-hover table-bordered">
+      <thead>
+                  <tr>
+                  <th><small>Nn</small></th>
+                  <th><small>ID</small></th>
+                  <th><small>УПФР</small></th>
+                  <th><small>Офис</small></th>
+                  <th><small>Код гор.</small></th>
+                  <th><small>Тел. гор.</small></th>
+                  <th><small>КСПД</small></th>
+                  <th><small>Фамилия</small></th>
+                  <th><small>Имя</small></th>
+                  <th><small>Отчество</small></th>
+                  <th><small>Должность</small></th>
+                  <th><small>Отдел</small></th>
+                  </tr>
+      </thead> 
+        <tbody>
+          <tr *ngFor="let u of users; let i = index" [hidden]="u.id==''">
+              <td><small>{{ i+1 }}</small></td>
+              <td><small>{{ u.id }}</small></td>
+<td class="text-center"><button  class="btn btn-sm" (click)="showUpfr1(u.dptcod)"  
+  style="background-color: rgb(186, 213, 248);"><small>{{u.dptcod}}</small></button></td>
+<td class="text-center"><button  class="btn btn-sm" (click)="showOffice(u.dptcod, u.office)" 
+  style="background-color: rgb(186, 213, 248);"><small>{{u.office}}</small></button></td>
+              <td><small>{{ u.citycode }}</small></td>
+              <td><small>{{ u.phone_city }}</small></td>
+              <td><small>{{ u.phone_kspd }}</small></td>
+              <td><small>{{ u.fam }}</small></td>
+              <td><small>{{ u.nam }}</small></td>
+              <td><small>{{ u.ptr }}</small></td>
+              <td><small>{{ u.dolgnost }}</small></td>
+              <td><small>{{ u.otdel }}</small></td>
+           </tr>
+      </tbody>
+  </table>
+  </div>
+ </div>
+</div>

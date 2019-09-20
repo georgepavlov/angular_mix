@@ -1,0 +1,42 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12"> 
+        <br />
+        <div class="float-left">
+          <h5>Запросить курс валют (сервис "Центробанка")</h5>
+        </div>
+        <div class="float-right">
+          <button class="btn btn-primary" (click)="openInputDate()">Ввод даты</button>
+        </div>       
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">  
+    <div class="col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12"> 
+      <h5>Курс валют на дату: {{ date_rq_xml }}</h5>    
+      <table #filesTable data-page-length='6' id='somelist' class="table table-sm table-hover table-bordered">
+      <thead>
+                  <tr class="text-center">
+                  <th><small>Nn</small></th>
+                  <th><small>Код</small></th>
+                  <th><small>Номинал</small></th>
+                  <th><small>Наименование</small></th>
+                  <th><small>Рублей</small></th>
+                  </tr>
+      </thead> 
+        <tbody>
+          <tr *ngFor="let item of xmlItems; let i = index"> 
+            <td><small>{{ i+1 }}</small></td>   
+            <td><small>{{ item.charcode }}</small></td>    
+            <td><small>{{ item.nominal }}</small></td>    
+            <td><small>{{ item.name }}</small></td>    
+            <td><small>{{ item.value }}</small></td>    
+          </tr>    
+      </tbody>
+  </table>
+  </div>
+ </div>
+</div>
+

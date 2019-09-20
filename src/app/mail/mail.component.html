@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12 col-xs-12"> 
+        <br />
+      <div class="card border-success">
+          <div class="card-header bg-success text-white">
+              Отправить сообщение и файл, используя SMTP на gmail.com
+          </div>
+        <div class="card-body">  
+        <form #myForm="ngForm">
+            <div class="form-group row">
+                <label for="namesender" class="col-sm-3 col-form-label">Имя отправителя</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="namesender" class="form-control" 
+                     [ngModel]='pack.namesender' #namesender="ngModel" required  placeholder="имя отправителя" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="email_out" class="col-sm-3 col-form-label">Email получателя</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" name="email_out"  [ngModel] = 'pack.email_out' 
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" #email_out="ngModel" required placeholder="Email" />
+                </div>
+                <div *ngIf="email_out.invalid && (email_out.dirty || email_out.touched)" class="alert alert-danger">
+                    <div *ngIf = "email_out.errors?.required">
+                        Заполнение поля обязательно
+                    </div>
+                    <div *ngIf = "email_out.errors?.pattern && email_out.touched">
+                        Формат Email неверен
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="sendtext">Текст сообщения</label>
+                <textarea class="form-control" name="sendtext" rows="3" [ngModel]="pack.sendtext" required ></textarea>
+              </div>
+          <hr />
+          <div class="float-left">
+            <h5>Присоединение файла</h5>
+          </div>
+          <div class="float-right">
+
+            <div class="form-group">
+            <input type="file" #fileInput placeholder="Upload file..." name="myfile" />
+            <button type="submit" class="btn btn-success" [disabled]='progr||!myForm.form.valid' 
+            (click)="send(myForm)">Отправить</button>
+            &nbsp;<button type="reset" class="btn btn-primary"  (click)="clearForm(myForm)">Очистить</button>
+            </div>
+          
+          </div>
+          <br /> 
+        </form>
+        
+          <div [hidden]='!progr' class="text-center">
+                <fa-icon [icon]="['fas', 'spinner']" [fixedWidth]="true" size="2x" [spin]="true"></fa-icon>
+                 &nbsp;Отправка...
+          </div>       
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

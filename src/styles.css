@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+.table thead > tr > th.vert-align
+{
+    vertical-align: middle;
+}
+.table-hover tbody tr:hover td {
+    background: #BBF8BA;
+}
+.table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive>.table {
+    margin-bottom: 0;
+}
+.table-responsive>.table>thead>tr>th,
+.table-responsive>.table>tbody>tr>th,
+.table-responsive>.table>tfoot>tr>th,
+.table-responsive>.table>thead>tr>td,
+.table-responsive>.table>tbody>tr>td,
+.table-responsive>.table>tfoot>tr>td {
+    white-space: wrap;
+}

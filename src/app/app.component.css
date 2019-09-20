@@ -1,0 +1,8 @@
+a:link {
+    color: #000;
+}
+
+a:hover.dropdown-item {
+    background: #0a82d3; /* Цвет фона под ссылкой */ 
+    color: #ffe; 
+   }
