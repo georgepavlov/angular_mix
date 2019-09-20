@@ -9,16 +9,12 @@ import Swal from 'sweetalert2';
 export class GeolocateComponent implements OnInit {
   location: any;
   link: string;
-  latitude = 48.774158;
-  longitude = 44.565495;
-  flg_ok = false;
   constructor() { }
 
   ngOnInit() {
     
   }
   onNavigate() {
-    //let link = `https://nakarte.me/#m=16/`+this.latitude+'/'+this.longitude; 
     if(navigator.geolocation) {
       Swal.fire({
         title: 'Определение координат',
@@ -28,7 +24,6 @@ export class GeolocateComponent implements OnInit {
       })
       navigator.geolocation.getCurrentPosition(position => {
         this.location = position.coords;
-        this.flg_ok = true;
         Swal.fire({
           type: 'success',
           title: 'Информация',
