@@ -10,6 +10,8 @@ import {Router} from "@angular/router";
 import { NgbActiveModal, NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { NgForm, NgModel } from '@angular/forms';
 
+declare var $: any;
+
 @Component({
   selector: 'ngbd-modal-content',
   templateUrl: './modal.component.html',
@@ -85,7 +87,7 @@ export class NgbdModalContent {
 }
 //end---------------------------
 
-declare var $;
+//declare var $: any;
 
 @Component({
   selector: 'app-view',

@@ -9,7 +9,9 @@
         <div class="float-right">
           <input type="file" #fileInput placeholder="Upload file..." />
           <button class="btn btn-primary" [disabled]='progr' (click)="upload()">Загрузить</button>
-          &nbsp;<button class="btn btn-success" (click)="showIp()">Узнать IP</button> 
+          &nbsp;<button class="btn btn-success" ngbPopover="Для определения IP использован сервис www.ipify.org. 
+          Для определения города и координат также использован сервис www.ipify.ru." 
+         triggers="mouseenter:mouseleave" placement="bottom" (click)="showIp()">Узнать IP</button> 
         </div>
         <br /> 
         <div [hidden]='!progr' class="text-center">

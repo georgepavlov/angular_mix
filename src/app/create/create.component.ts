@@ -43,7 +43,7 @@ export class CreateComponent implements OnInit {
         }) 
       }
       this.progr = true;
-      this.UploadService.uploadFile('http://192.168.1.70/phones/ajax/loadAnyFile_a.php', fileBrowser.files[0])
+      this.UploadService.uploadFile('http://localhost/phones/ajax/loadAnyFile_a.php', fileBrowser.files[0])
         .subscribe(
           response => {
             //console.log( JSON.stringify(response.type) );
@@ -139,7 +139,7 @@ export class CreateComponent implements OnInit {
   */
   view_doc1(path: string, filename: string) {
 
-    this.http.get("http://192.168.1.70://phones/ajax/view_doc_a.php?path="+path,
+    this.http.get("http://localhost/phones/ajax/view_doc_a.php?path="+path,
     {responseType: 'blob' as 'json'}).subscribe(
         (response: any) =>{
             let dataType = response.type;
@@ -204,26 +204,48 @@ export class CreateComponent implements OnInit {
               )  
       } 
       showIp() {
-        const ipAPI = 'https://api.ipify.org?format=json';
-        
-          Swal.queue([{
-            title: 'Ваш публичный IP',
-            confirmButtonText: 'Показать мой внешний IP',
-            text:
-              'Ваш публичный IP будет определен ' +
-              'с помощью AJAX запроса',
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-              return fetch(ipAPI)
-                .then(response => response.json())
-                .then(data => Swal.insertQueueStep(data.ip))
-                .catch(() => {
-                  Swal.insertQueueStep({
-                    type: 'error',
-                    title: 'Unable to get your public IP'
-                  })
+
+        const ipAPI1 = 'https://api.ipify.org?format=json';
+        const ipAPI2 = 'https://geo.ipify.org/api/v1?apiKey=at_RWDk86MAm8Yqr3zskoW8UfSPZzgAw&ipAddress=';
+        let ip = '';
+        let link = '';
+        Swal.fire({
+          title: 'Определение IP и по IP координат',
+          onBeforeOpen: () => {
+            Swal.showLoading();
+          }
+        })
+              fetch(ipAPI1)
+              .then(response=> response.json())
+              .then(data => ip = data.ip)
+              .then(() => {
+                fetch(ipAPI2 + ip)
+              .then(response => response.json())
+              .then((data) => {
+               //console.log(ip+' '+data.location.value);
+                Swal.fire({
+                type: 'success',
+                title: 'Информация',
+                html: '<strong><i>IP: '+ip+ ', место: '+data.location.region+', '+data.location.city+'</i></strong>' 
                 })
-            }
-          }])
-      }
+  
+               link = `https://nakarte.me/#m=16/`+data.location.lat+'/'+data.location.lng;
+               window.open(link, "_blank");
+  
+              })
+              })
+              .catch(() => {
+                Swal.fire({
+                  type: 'error',
+                  title: 'Ошибка',
+                  html: '<b>Ошибка при попытке определения IP</b>'  
+                }) 
+  
+              })
+
+      
+
+
+    }
+      
 }

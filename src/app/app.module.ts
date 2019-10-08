@@ -13,6 +13,8 @@ import { UpdateComponent, NgbdModalDate } from './update/update.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MailComponent } from './mail/mail.component';
 import { GeolocateComponent } from './geolocate/geolocate.component';
+import { KladrComponent } from './kladr/kladr.component';
+import { NgxDadataModule } from '@kolkov/ngx-dadata';
 
 
 
@@ -25,7 +27,8 @@ import { GeolocateComponent } from './geolocate/geolocate.component';
     UpdateComponent,
     NgbdModalDate,
     MailComponent,
-    GeolocateComponent
+    GeolocateComponent,
+    KladrComponent
     
   ],
   imports: [
@@ -34,8 +37,8 @@ import { GeolocateComponent } from './geolocate/geolocate.component';
     HttpClientModule,
     FormsModule,
     NgbModule,
-    FontAwesomeModule
-  ],
+    FontAwesomeModule, NgxDadataModule 
+    ],
   providers: [],
   bootstrap: [AppComponent],
   entryComponents: [NgbdModalContent, NgbdModalDate]   

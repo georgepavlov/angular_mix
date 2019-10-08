@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-  part_url = 'http://192.168.1.70/phones/';
-  //part_url = 'http://localhost/phones/';
+  //part_url = 'http://192.168.1.70/phones/';
+  part_url = 'http://localhost/phones/';
   dptcod: string;
   getData() {
     return this.http.get(this.part_url + 'ajax/all_list_a.php');

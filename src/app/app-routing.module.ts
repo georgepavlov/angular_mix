@@ -5,6 +5,7 @@ import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { MailComponent } from './mail/mail.component';
 import { GeolocateComponent } from './geolocate/geolocate.component';
+import { KladrComponent } from './kladr/kladr.component';
 
 const routes: Routes = [
   { path: '', component: ViewComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'update', component: UpdateComponent },
   { path: 'mail', component: MailComponent },
   { path: 'geoloc', component: GeolocateComponent },
+  { path: 'kladr', component: KladrComponent },
   { path: '**', component: ViewComponent }
 ];
 

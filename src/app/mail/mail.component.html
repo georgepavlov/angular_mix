@@ -11,22 +11,37 @@
             <div class="form-group row">
                 <label for="namesender" class="col-sm-3 col-form-label">Имя отправителя</label>
                 <div class="col-sm-4">
+                  <ngx-dadata [config]="configFio" id="fio" name="namesender" 
+                  [ngModel]='pack.namesender' #namesender="ngModel" required placeholder='Введите ФИО в свободной форме'>
+                  </ngx-dadata>
+                <!--
                     <input type="text" class="form-control" name="namesender" class="form-control" 
                      [ngModel]='pack.namesender' #namesender="ngModel" required  placeholder="имя отправителя" />
+                --> 
+                     
                 </div>
             </div>
             <div class="form-group row">
                 <label for="email_out" class="col-sm-3 col-form-label">Email получателя</label>
                 <div class="col-sm-4">
+                    <ngx-dadata [config]="configEmail" id="email" name="email_out"  [ngModel] = 'pack.email_out' 
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" #email_out="ngModel" required placeholder='Введите Email'></ngx-dadata>
+                  <!--
                     <input type="text" class="form-control" name="email_out"  [ngModel] = 'pack.email_out' 
                     pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" #email_out="ngModel" required placeholder="Email" />
+                  -->  
                 </div>
                 <div *ngIf="email_out.invalid && (email_out.dirty || email_out.touched)" class="alert alert-danger">
                     <div *ngIf = "email_out.errors?.required">
                         Заполнение поля обязательно
                     </div>
+                    <!--
                     <div *ngIf = "email_out.errors?.pattern && email_out.touched">
                         Формат Email неверен
+                    </div>
+                    -->
+                    <div *ngIf = "email_out.errors?.pattern">
+                      Формат Email неверен
                     </div>
                 </div>
             </div>

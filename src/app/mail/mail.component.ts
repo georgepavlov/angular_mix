@@ -1,6 +1,7 @@
 import { Component, ViewChild, Input, OnInit } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
-import { HttpClient, HttpEventType, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import {DadataConfig, DadataParty, DadataSuggestion, DadataType} from '@kolkov/ngx-dadata';
 import { UploadService } from '../upload.service';
 import { ApiService} from '../api.service';
 import Swal from 'sweetalert2';
@@ -30,7 +31,7 @@ export class MailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pack = new Parcel({namesender:'Директор', email_out:'yashin_gp@mail.ru', 
+    this.pack = new Parcel({namesender:'Начальник', email_out:'yashin_gp@mail.ru', 
     sendtext:'Прошу принять к сведению эту информацию. Необходимо ее изучить и использовать в работе.'})
   }
   clearForm(form: NgForm) {
@@ -48,7 +49,7 @@ export class MailComponent implements OnInit {
   send(form: NgForm) {
     //if (this.one_send) return;
     const fileBrowser = this.fileInput.nativeElement;
-    let timerId = setTimeout(this.outTime, 180000);
+    let timerId = setTimeout(this.outTime, 120000);
     if (fileBrowser.files && fileBrowser.files[0]) {
       //есть файл вложений
       if ( fileBrowser.files[0].size > 5*1048576 ) {
@@ -61,7 +62,7 @@ export class MailComponent implements OnInit {
       }
       //let timerId = setTimeout(this.outTime, 180000);
       this.progr = true;
-      this.UploadService.uploadFile('http://192.168.1.70/phones/ajax/send.php', fileBrowser.files[0],form.value.namesender,
+      this.UploadService.uploadFile('http://localhost/phones/ajax/send.php', fileBrowser.files[0],form.value.namesender,
       form.value.email_out, form.value.sendtext)
         .subscribe(
           response => {
@@ -89,15 +90,7 @@ export class MailComponent implements OnInit {
                 }) 
               }
             }
-            /* else {
-              this.progr = false;
-            return Swal.fire({
-              type: 'error',
-              title: 'Ошибка',
-              html: '<b>Ошибка при загрузке файла</b>'  
-            }) 
-            }
-            */
+            
           }, error => {
             this.progr = false;
             clearTimeout(timerId);
@@ -110,7 +103,7 @@ export class MailComponent implements OnInit {
         )
     } else {
       this.progr = true;
-      this.UploadService.uploadFile('http://192.168.1.70/phones/ajax/send.php', fileBrowser.files[0],form.value.namesender,
+      this.UploadService.uploadFile('http://localhost/phones/ajax/send.php', fileBrowser.files[0],form.value.namesender,
       form.value.email_out, form.value.sendtext)
         .subscribe(
           response => {
@@ -147,6 +140,12 @@ export class MailComponent implements OnInit {
 
     }
   }  
-
-
+  configFio: DadataConfig = {
+    apiKey: '078b9de120f7c2669984977c9da6c3748913acf0',
+    type: DadataType.fio,
+  };
+  configEmail: DadataConfig = {
+    apiKey: '078b9de120f7c2669984977c9da6c3748913acf0',
+    type: DadataType.email,
+  };
 }

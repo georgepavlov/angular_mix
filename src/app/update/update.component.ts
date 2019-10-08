@@ -121,7 +121,7 @@ export class UpdateComponent {
     var data = {
       date_rq: date_r
     }
-    this.http.post('http://192.168.1.70/phones/ajax/gxml.php', data).subscribe( 
+    this.http.post('http://localhost/phones/ajax/gxml.php', data).subscribe( 
       response => {
         this.xmlItems = response;
         //console.log( JSON.stringify(response) );
